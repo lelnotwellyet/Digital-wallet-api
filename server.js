@@ -75,17 +75,14 @@ app.get("/api/users/:id/add", (req, res) => {
     return res.status(400).json({ message: "Invalid amount" });
   }
 
-  user.walletBalance += amount;
-  saveUsers(users);
+  const newBalance = user.walletBalance + amount;
 
   res.json({
-    message: "Money added successfully",
-    newBalance: user.walletBalance
+    message: "Money added successfully (simulation)",
+    previousBalance: user.walletBalance,
+    addedAmount: amount,
+    newBalance: newBalance
   });
-});
-
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
 });
 
 module.exports = app;
